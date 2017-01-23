@@ -11,6 +11,7 @@ public class AgendaDeTransferencias {
 	private List<Transferencia> transferencias = new ArrayList<Transferencia>();
 	
 	public void agendar(Transferencia transferencia) {
+		transferencia.calcularTaxa();
 		transferencias.add(transferencia);
 	}
 	

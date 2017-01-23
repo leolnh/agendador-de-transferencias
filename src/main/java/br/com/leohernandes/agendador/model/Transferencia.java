@@ -77,5 +77,9 @@ public class Transferencia {
 	public void setTipo(TipoDeTransferencia tipo) {
 		this.tipo = tipo;
 	}
+
+	public void calcularTaxa() {
+		this.taxa = tipo.calcularTaxa(this);
+	}
 	
 }
