@@ -16,6 +16,8 @@ public class Transferencia {
 	private LocalDate dataDaTransferencia;
 	
 	private LocalDate dataDoAgendamento;
+	
+	private TipoDeTransferencia tipo;
 
 	public String getContaOrigem() {
 		return contaOrigem;
@@ -63,6 +65,14 @@ public class Transferencia {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public TipoDeTransferencia getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoDeTransferencia tipo) {
+		this.tipo = tipo;
 	}
 	
 }
