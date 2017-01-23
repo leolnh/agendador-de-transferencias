@@ -3,6 +3,8 @@ package br.com.leohernandes.agendador.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Future;
+
 public class Transferencia {
 	
 	private String contaOrigem;
@@ -15,6 +17,7 @@ public class Transferencia {
 	
 	private LocalDate dataDaTransferencia;
 	
+	@Future
 	private LocalDate dataDoAgendamento;
 	
 	private TipoDeTransferencia tipo;
