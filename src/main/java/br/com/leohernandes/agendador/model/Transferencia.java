@@ -1,12 +1,15 @@
 package br.com.leohernandes.agendador.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
 
-public class Transferencia {
+public class Transferencia implements Serializable{
 	
+	private static final long serialVersionUID = 5636605851904462563L;
+
 	private String contaOrigem;
 	
 	private String contaDestino;
@@ -16,7 +19,7 @@ public class Transferencia {
 	private BigDecimal taxa;
 	
 	private LocalDate dataDaTransferencia;
-	
+		
 	@Future
 	private LocalDate dataDoAgendamento;
 	

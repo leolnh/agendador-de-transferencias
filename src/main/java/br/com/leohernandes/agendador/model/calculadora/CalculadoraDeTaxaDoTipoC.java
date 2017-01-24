@@ -13,20 +13,21 @@ public class CalculadoraDeTaxaDoTipoC implements CalculadoraDeTaxa {
 	public BigDecimal calcularTaxa(Transferencia transferencia) {
 		long dias = ChronoUnit.DAYS.between(transferencia.getDataDoAgendamento(), 
 				transferencia.getDataDaTransferencia());
+		BigDecimal valor = transferencia.getValor();
 		if (dias > 30) {
-			return arredondar(new BigDecimal(1.2));
+			return arredondar(new BigDecimal(1.2/100).multiply(valor));
 		} else if (dias > 25) {
-			return arredondar(new BigDecimal(2.1));
+			return arredondar(new BigDecimal(2.1/100).multiply(valor));
 		} else if (dias > 20) {
-			return arredondar(new BigDecimal(4.3));
+			return arredondar(new BigDecimal(4.3/100).multiply(valor));
 		} else if (dias > 15) {
-			return arredondar(new BigDecimal(5.4));
+			return arredondar(new BigDecimal(5.4/100).multiply(valor));
 		} else if (dias > 10) {
-			return arredondar(new BigDecimal(6.7));
+			return arredondar(new BigDecimal(6.7/100).multiply(valor));
 		} else if (dias > 05) {
-			return arredondar(new BigDecimal(7.4));
+			return arredondar(new BigDecimal(7.4/100).multiply(valor));
 		} else {
-			return arredondar(new BigDecimal(8.3));
+			return arredondar(new BigDecimal(8.3/100).multiply(valor));
 		}
 	}
 
