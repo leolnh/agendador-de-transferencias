@@ -1,6 +1,5 @@
 package br.com.leohernandes.agendador.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,7 @@ public class AgendaDeTransferencias {
 	private List<Transferencia> transferencias = new ArrayList<Transferencia>();
 	
 	public void agendar(Transferencia transferencia) {
-		transferencia.setDataDoAgendamento(LocalDate.now());
-		transferencia.calcularTaxa();
+		transferencia.preparar();
 		transferencias.add(transferencia);
 	}
 	

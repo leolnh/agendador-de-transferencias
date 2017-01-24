@@ -4,8 +4,31 @@
 
 .alert {
 	margin: 20px 20px 0px;
+	padding: 5px 10px 2px !important;
 }
 
 .table {
 	margin-bottom: 0;
+}
+
+.table thead th,
+.table thead td{
+	text-align: center;
+}
+
+.btn {
+	width: 100%;
+}
+
+.conta {
+	text-align: left;
+}
+
+.data, 
+.tipo {
+	text-align: center;
+}
+
+.valor {
+	text-align: right;
 }

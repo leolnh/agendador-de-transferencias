@@ -15,15 +15,14 @@
 
 	<dependencies>
 	
-	
+			
 	
 		<dependency>
 			<groupId>br.com.caelum</groupId>
 			<artifactId>vraptor</artifactId>
 			<version>4.0.0.Final</version>
 		</dependency>
-		
-		
+				
 		<dependency>
 		    <groupId>br.com.caelum.vraptor</groupId>
 		    <artifactId>vraptor-javatime</artifactId>

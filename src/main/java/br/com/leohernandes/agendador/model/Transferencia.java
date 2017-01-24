@@ -4,25 +4,30 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class Transferencia implements Serializable{
 	
 	private static final long serialVersionUID = 5636605851904462563L;
 
+	@NotNull @Pattern(regexp="\\d{1,5}-\\d{1,1}", message="deve ter o formato 00000-0")
 	private String contaOrigem;
 	
+	@NotNull @Pattern(regexp="\\d{1,5}-\\d{1,1}", message="deve ter o formato 00000-0")
 	private String contaDestino;
 
+	@NotNull 
 	private BigDecimal valor;
 	
 	private BigDecimal taxa;
 	
+	@NotNull
 	private LocalDate dataDaTransferencia;
 		
-	@Future
 	private LocalDate dataDoAgendamento;
 	
+	@NotNull
 	private TipoDeTransferencia tipo;
 
 	public String getContaOrigem() {
@@ -81,7 +86,8 @@ public class Transferencia implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public void calcularTaxa() {
+	public void preparar() {
+		this.dataDoAgendamento = LocalDate.now();
 		this.taxa = tipo.calcularTaxa(this);
 	}
 	

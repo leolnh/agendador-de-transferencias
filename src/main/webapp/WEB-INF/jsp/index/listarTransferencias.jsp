@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -11,7 +11,13 @@
 </head>
 
 <body>
-<div class="alert alert-success">Transferência salva com sucesso</div>
+
+<c:if test="${not empty mensagem}">
+	<div class="alert alert-success">${mensagem}</div>
+</c:if>
+<c:forEach var="error" items="${errors}">
+	<div class="alert alert-danger"><b><fmt:message key="${error.category}"/></b> - ${error.message}</div>
+</c:forEach>
 <div class="panel panel-default">
 	
     <div class="panel-body">
@@ -21,40 +27,39 @@
 		<div class="row">
 			
 			<div class="form-group col-md-4"> 
-				<label for="origem">Conta Origem</label> 
-				<input name="transferencia.contaOrigem" class="form-control" id="origem" type="text"> 
+				<label for="origem"><fmt:message key="contaOrigem"/></label> 
+				<input name="transferencia.contaOrigem" value="${transferencia.contaOrigem}" class="form-control" id="origem" type="text" placeholder="00000-0"> 
 			</div>
 			
 			<div class="form-group col-md-4"> 
-				<label for="destino">Conta Destino</label> 
-				<input name="transferencia.contaDestino" class="form-control" id="destino" type="text"> 
+				<label for="destino"><fmt:message key="contaDestino"/></label> 
+				<input name="transferencia.contaDestino" value="${transferencia.contaDestino}" class="form-control" id="destino" type="text" placeholder="00000-0"> 
 			</div>
 			
 			<div class="form-group col-md-4"> 
-				<label for="destino">Data</label> 
-				<input name="transferencia.dataDaTransferencia" class="form-control" id="destino" type="text"> 
+				<label for="destino"><fmt:message key="dataDaTransferencia"/></label> 
+				<input name="transferencia.dataDaTransferencia" value="${transferencia.dataDaTransferencia}" class="form-control" id="destino" type="text"  placeholder="DD/MM/AAAA"> 
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-4"> 
-				<label for="valor">Valor</label> 
-				<input name="transferencia.valor" class="form-control" id="valor" type="text"> 
+				<label for="valor"><fmt:message key="valor"/></label> 
+				<input name="transferencia.valor" value="${transferencia.valor}" class="form-control" id="valor" type="text" placeholder="000,00"> 
 			</div>
 			
 			
 			<div class="form-group col-md-4"> 
-				<label for="tipo">Tipo</label> 
+				<label for="tipo"><fmt:message key="tipo"/></label> 
 				<select name="transferencia.tipo" class="form-control" id="tipo">
 			 		<c:forEach items="${tipos}" var="tipo">
-						<option value="${tipo}">${tipo}</option>  
+						<option value="${tipo}" ${transferencia.tipo==tipo?' selected ':''}>${tipo}</option>  
 		            </c:forEach>
 				</select>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-4"> 
-				<label>&nbsp;</label> 
-				<input type="submit" value="Agendar" />
+				<input type="submit" value="Agendar" class="btn btn-primary"/>
 			</div>
 		</div>
 		</form>
@@ -70,26 +75,33 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>Conta Origem</th>
-						<th>Conta Destino</th>
-						<th>Valor</th>
-						<th>Taxa</th>
-						<th>Data</th>
-						<th>Tipo</th>
+						<th><fmt:message key="contaOrigem"/></th>
+						<th><fmt:message key="contaDestino"/></th>
+						<th><fmt:message key="valor"/></th>
+						<th><fmt:message key="taxa"/></th>
+						<th><fmt:message key="dataDaTransferencia"/></th>
+						<th><fmt:message key="dataDoAgendamento"/></th>
+						<th><fmt:message key="tipo"/></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="transferencia" items="${transferencias}">
 						<tr>
-							<td>${transferencia.contaOrigem}</td>
-							<td>${transferencia.contaDestino}</td>
-							<td><fmt:formatNumber type="currency" value="${transferencia.valor}" /></td>
-							<td><fmt:formatNumber type="currency" value="${transferencia.taxa}" /></td>
-							<td>${transferencia.dataDaTransferencia}</td>
-							<td>${transferencia.tipo}</td>
+							<td class="conta">${transferencia.contaOrigem}</td>
+							<td class="conta">${transferencia.contaDestino}</td>
+							<td class="valor"><fmt:formatNumber type="currency" value="${transferencia.valor}" /></td>
+							<td class="valor"><fmt:formatNumber type="currency" value="${transferencia.taxa}" /></td>
+							<td class="data">${transferencia.dataDaTransferencia}</td>
+							<td class="data">${transferencia.dataDoAgendamento}</td>
+							<td class="tipo">${transferencia.tipo}</td>
 						</tr>
 					</c:forEach>
 					
+					<c:if test="${empty transferencias}">
+						<tr>
+							<td colspan="7">Nenhuma transferencia agendada.</td>
+						</tr>
+					</c:if>
 				</tbody>
 			</table>
 		</div>
